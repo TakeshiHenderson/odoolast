@@ -1,0 +1,40 @@
+<odoo>
+    <!-- Gallery Page Template -->
+
+    <template id="gallery_page" name="Gallery Page">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Gallery</h1>
+                <div class="row">
+                    <t t-foreach="images" t-as="image">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <a t-att-href="'/gallery/image/%d' % image.id">
+                                    <img t-att-src="image.image and 'data:image/png;base64,' + image.image.decode('utf-8') or ''"
+                                        class="img-fluid" alt="image.name" />
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title" t-esc="image.name"/>
+                                    <p class="card-text" t-esc="image.description"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!-- Gallery Detail Page Template -->
+    <template id="gallery_detail_template" name="Gallery Detail Page">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1 t-esc="image.name" />
+                <img t-att-src="image.image and 'data:image/png;base64,' + image.image.decode('utf-8') or ''"
+                    class="img-fluid" alt="image.name" />
+
+                <p t-esc="image.description" />
+                <a href="/gallery">Back to Gallery</a>
+            </div>
+        </t>
+    </template>
+</odoo>
